@@ -1,0 +1,49 @@
+---
+import Base from '../layouts/Base.astro';
+---
+<Base titulo="Contribuir" descripcion="Cómo proponer un recurso al repositorio y cómo se revisa.">
+  <section class="contenedor pagina">
+    <p class="rotulo">Modelo editorial</p>
+    <h1>Proponer un recurso</h1>
+    <div class="prosa">
+      <p class="bajada">
+        El repositorio está abierto a docentes, ayudantes y estudiantes. Cada recurso pasa por una revisión antes de
+        publicarse, como en una revista académica.
+      </p>
+
+      <h2>1. Propón</h2>
+      <p>
+        Escríbenos qué es el recurso, para quién es y qué se aprende con él. Si usas GitHub, abre un <em>issue</em> con
+        la plantilla «Proponer un recurso», o envía directamente la ficha (un archivo en <code>src/content/recursos/</code>)
+        siguiendo la plantilla de <code>docs/PLANTILLA-FICHA.md</code>.
+      </p>
+
+      <h2>2. Revisión</h2>
+      <p>Alguien del equipo revisa tres cosas y deja sus comentarios en la propuesta:</p>
+      <ul>
+        <li><strong>Contenido jurídico.</strong> Normas, fallos y citas existen y dicen lo que el recurso afirma, con su fuente.</li>
+        <li><strong>Uso de la IA.</strong> El recurso enseña a verificar lo que la IA produce, no solo a usarla.</li>
+        <li><strong>Derechos.</strong> Licencia declarada, medios de terceros con su crédito y nada confidencial ni con datos personales.</li>
+      </ul>
+
+      <h2>3. Publicación</h2>
+      <p>
+        Con la revisión aprobada, la ficha pasa de «Borrador» o «En revisión» a «Publicado» y queda con tu nombre en la
+        autoría. Las versiones siguientes siguen el mismo camino.
+      </p>
+
+      <h2>Qué no publicamos</h2>
+      <ul>
+        <li>Informes o documentos encargados por una institución sin su autorización.</li>
+        <li>Material con datos de clientes, estudiantes o casos reales sin anonimizar.</li>
+        <li>Logos o manuales de marca de terceros sin permiso de uso.</li>
+      </ul>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .pagina { padding-block: 56px 96px; }
+  .bajada { font-size: 1.15rem; color: var(--suave); }
+  code { font: 0.85em var(--mono); background: var(--superficie); padding: 1px 4px; }
+</style>

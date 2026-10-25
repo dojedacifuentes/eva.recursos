@@ -1,0 +1,111 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Tarjeta from '../../components/Tarjeta.astro';
+import { TIPOS, EJES, ESTADOS } from '../../content.config';
+
+const orden = { publicado: 0, revision: 1, borrador: 2 };
+const recursos = (await getCollection('recursos')).sort(
+  (a, b) => orden[a.data.estado] - orden[b.data.estado] || a.data.titulo.localeCompare(b.data.titulo, 'es'),
+);
+const tiposUsados = Object.entries(TIPOS).filter(([k]) => recursos.some((r) => r.data.tipo === k));
+---
+<Base titulo="Recursos" descripcion="Catálogo de recursos abiertos de IA y Derecho, con filtros por público, eje, tipo y estado.">
+  <section class="contenedor encabezado">
+    <p class="rotulo">Catálogo</p>
+    <h1>Recursos</h1>
+    <p class="bajada">Filtra por público, eje o tipo, o busca por palabra. Cada ficha dice dónde usar el recurso y con qué licencia.</p>
+    <div id="buscador"></div>
+  </section>
+
+  <section class="contenedor catalogo">
+    <form class="filtros" id="filtros" aria-label="Filtros">
+      <label>Público
+        <select name="publico">
+          <option value="">Todos</option>
+          <option value="estudiantes">Estudiantes</option>
+          <option value="docentes">Docentes</option>
+        </select>
+      </label>
+      <label>Eje
+        <select name="eje">
+          <option value="">Todos</option>
+          {Object.entries(EJES).map(([k, v]) => <option value={k}>{v}</option>)}
+        </select>
+      </label>
+      <label>Tipo
+        <select name="tipo">
+          <option value="">Todos</option>
+          {tiposUsados.map(([k, v]) => <option value={k}>{v}</option>)}
+        </select>
+      </label>
+      <label>Estado
+        <select name="estado">
+          <option value="">Todos</option>
+          {Object.entries(ESTADOS).map(([k, v]) => <option value={k}>{v}</option>)}
+        </select>
+      </label>
+      <p class="contador" aria-live="polite"><span id="n">{recursos.length}</span> de {recursos.length}</p>
+    </form>
+
+    <div class="rejilla" id="rejilla">
+      {recursos.map((r) => <Tarjeta recurso={r} />)}
+    </div>
+    <p id="vacio" hidden>No hay recursos con esos filtros.</p>
+  </section>
+</Base>
+
+<link href="/pagefind/pagefind-ui.css" rel="stylesheet" />
+<script is:inline src="/pagefind/pagefind-ui.js"></script>
+<script>
+  const form = document.getElementById('filtros') as HTMLFormElement;
+  const tarjetas = [...document.querySelectorAll<HTMLElement>('#rejilla .tarjeta')];
+  const campos = ['publico', 'eje', 'tipo', 'estado'] as const;
+  const atributo = { publico: 'publico', eje: 'ejes', tipo: 'tipo', estado: 'estado' } as const;
+
+  const params = new URLSearchParams(location.search);
+  for (const c of campos) {
+    const v = params.get(c);
+    if (v) (form.elements.namedItem(c) as HTMLSelectElement).value = v;
+  }
+
+  function filtrar() {
+    const datos = new FormData(form);
+    let visibles = 0;
+    for (const t of tarjetas) {
+      const ok = campos.every((c) => {
+        const v = datos.get(c) as string;
+        return !v || (t.dataset[atributo[c]] ?? '').split(' ').includes(v);
+      });
+      t.hidden = !ok;
+      if (ok) visibles++;
+    }
+    document.getElementById('n')!.textContent = String(visibles);
+    document.getElementById('vacio')!.hidden = visibles > 0;
+    const q = new URLSearchParams();
+    for (const c of campos) if (datos.get(c)) q.set(c, datos.get(c) as string);
+    history.replaceState(null, '', q.size ? `?${q}` : location.pathname);
+  }
+  form.addEventListener('change', filtrar);
+  filtrar();
+
+  // Búsqueda de texto completo (Pagefind se genera al construir; en desarrollo no existe)
+  // @ts-ignore
+  if (window.PagefindUI) new window.PagefindUI({ element: '#buscador', showSubResults: false, showImages: false, translations: { placeholder: 'Buscar en las fichas…' } });
+</script>
+
+<style>
+  .encabezado { padding-block: 56px 24px; }
+  .bajada { color: var(--suave); max-width: 60ch; }
+  #buscador { margin-top: 20px; max-width: 640px; --pagefind-ui-font: var(--sans); --pagefind-ui-text: var(--texto); --pagefind-ui-background: var(--fondo); --pagefind-ui-border: var(--filete-fuerte); --pagefind-ui-border-radius: 0; --pagefind-ui-primary: var(--acento-vivo); }
+  .catalogo { padding-bottom: 80px; }
+  .filtros {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; align-items: end;
+    padding: 16px; margin-bottom: 20px; border: 1px solid var(--filete); background: var(--superficie);
+  }
+  .filtros label { display: grid; gap: 4px; font: 500 0.75rem var(--mono); text-transform: uppercase; letter-spacing: 0.06em; color: var(--tenue); }
+  .filtros select { font: 500 0.95rem var(--sans); padding: 8px; border: 1px solid var(--filete-fuerte); background: var(--fondo); color: var(--texto); text-transform: none; letter-spacing: 0; }
+  .contador { margin: 0; font: 500 0.85rem var(--mono); color: var(--tenue); text-align: right; }
+  .rejilla { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr)); gap: 16px; }
+  :global(.tarjeta[hidden]) { display: none; }
+</style>

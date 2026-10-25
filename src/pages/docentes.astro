@@ -1,0 +1,56 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import Tarjeta from '../components/Tarjeta.astro';
+
+const docentes = (await getCollection('recursos')).filter((r) => r.data.publico.includes('docentes'));
+const grupos = [
+  { titulo: 'Para preparar una clase', tipos: ['guia', 'taller', 'lectura'] },
+  { titulo: 'Para cargar en el aula virtual', tipos: ['paquete-lms', 'curso', 'leccion', 'actividad', 'video'] },
+  { titulo: 'Para practicar con tus estudiantes', tipos: ['juego', 'herramienta', 'prompts'] },
+];
+---
+<Base titulo="Para docentes" descripcion="Cómo llevar los recursos de IA y Derecho a una clase: guías, paquetes para el aula virtual y actividades.">
+  <section class="contenedor encabezado">
+    <p class="rotulo">Kit docente</p>
+    <h1>Lleva la IA a tu clase de Derecho</h1>
+    <p class="bajada">
+      No hace falta saber programar ni tener cuenta en ninguna plataforma. Elige un recurso, revisa su ficha y úsalo
+      tal cual o adáptalo a tu curso.
+    </p>
+  </section>
+
+  <section class="seccion">
+    <div class="contenedor">
+      <p class="rotulo">En cuatro pasos</p>
+      <ol class="pasos">
+        <li><strong>Elige</strong><span>Busca por eje o tipo. La ficha dice para quién es, cuánto dura y qué se aprende.</span></li>
+        <li><strong>Revisa</strong><span>Lee el recurso como estudiante. Si la ficha dice «En revisión», confirma las fuentes jurídicas antes de usarlo.</span></li>
+        <li><strong>Adapta</strong><span>Cambia el caso, el ejemplo o la evaluación a tu ramo. La licencia de cada ficha dice qué puedes modificar.</span></li>
+        <li><strong>Cuéntanos</strong><span>Si lo usaste, propón tu versión o tus mejoras: así crece el repositorio.</span></li>
+      </ol>
+    </div>
+  </section>
+
+  {grupos.map((g) => {
+    const lista = docentes.filter((r) => g.tipos.includes(r.data.tipo));
+    return lista.length > 0 && (
+      <section class="seccion">
+        <div class="contenedor">
+          <h2>{g.titulo}</h2>
+          <div class="rejilla">{lista.map((r) => <Tarjeta recurso={r} />)}</div>
+        </div>
+      </section>
+    );
+  })}
+</Base>
+
+<style>
+  .encabezado { padding-block: 56px 40px; }
+  .bajada { color: var(--suave); max-width: 60ch; font-size: 1.15rem; }
+  .pasos { list-style: none; counter-reset: p; padding: 0; margin: 16px 0 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr)); gap: 16px; }
+  .pasos li { counter-increment: p; display: grid; gap: 6px; padding: 20px; border: 1px solid var(--filete); background: var(--fondo); }
+  .pasos li::before { content: '0' counter(p); font: 500 0.8rem var(--mono); color: var(--tenue); }
+  .pasos span { color: var(--suave); font-size: 0.95rem; }
+  .rejilla { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr)); gap: 16px; margin-top: 20px; }
+</style>

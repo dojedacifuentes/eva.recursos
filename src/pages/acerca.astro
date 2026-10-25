@@ -1,0 +1,40 @@
+---
+import Base from '../layouts/Base.astro';
+---
+<Base titulo="Acerca" descripcion="Qué es el repositorio de recursos de EVA, licencias y créditos.">
+  <section class="contenedor pagina">
+    <p class="rotulo">Acerca</p>
+    <h1>Un repositorio, muchos proyectos</h1>
+    <div class="prosa">
+      <p class="bajada">
+        EVA es una inteligencia artificial que enseña a usar la IA en Derecho y a desconfiar de ella. Sus materiales
+        nacieron en proyectos distintos (EVA Academy, EVA LAB, EVA × Derecho, los juegos de EVA Arcade, las series
+        de tutoriales); este repositorio los reúne con una ficha común para que se encuentren y se reutilicen.
+      </p>
+
+      <h2>Licencias</h2>
+      <p>
+        Cada ficha declara la licencia de su recurso. Mientras una ficha diga «Por definir», el recurso se puede usar en
+        clase pero no redistribuir. Las tipografías son Schibsted Grotesk e IBM Plex Mono (SIL Open Font License).
+      </p>
+
+      <h2>Medios generados con IA</h2>
+      <p>
+        La voz y la imagen de EVA, y algunas escenas y videos, se generan con herramientas de IA. Cada proyecto lleva
+        el registro de qué se generó, con qué herramienta y a partir de qué fuentes.
+      </p>
+
+      <h2>Modelos que seguimos</h2>
+      <ul>
+        <li><a href="https://programminghistorian.org/es/">The Programming Historian</a>: lecciones abiertas con revisión por pares.</li>
+        <li><a href="https://carpentries.org/">The Carpentries</a>: lecciones con guía para quien enseña.</li>
+        <li><a href="https://www.dublincore.org/specifications/lrmi/">LRMI</a>: metadatos educativos que leen buscadores y otros repositorios.</li>
+      </ul>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .pagina { padding-block: 56px 96px; }
+  .bajada { font-size: 1.15rem; color: var(--suave); }
+</style>

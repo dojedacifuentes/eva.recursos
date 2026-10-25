@@ -1,0 +1,38 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { TIPOS, EJES, ESTADOS } from '../content.config';
+
+interface Props { recurso: CollectionEntry<'recursos'> }
+const { recurso } = Astro.props;
+const d = recurso.data;
+---
+<article
+  class="tarjeta"
+  data-tipo={d.tipo}
+  data-publico={d.publico.join(' ')}
+  data-ejes={d.ejes.join(' ')}
+  data-estado={d.estado}
+>
+  <p class="rotulo">{TIPOS[d.tipo]} · {d.proyecto}</p>
+  <h3><a href={`/recursos/${recurso.id}/`}>{d.titulo}</a></h3>
+  <p class="resumen">{d.resumen}</p>
+  <div class="chips">
+    {d.publico.map((p) => <span class="chip">{p === 'docentes' ? 'Docentes' : 'Estudiantes'}</span>)}
+    {d.ejes.slice(0, 2).map((e) => <span class="chip">{EJES[e]}</span>)}
+    <span class={`chip estado-${d.estado}`}>{ESTADOS[d.estado]}</span>
+  </div>
+</article>
+
+<style>
+  .tarjeta {
+    position: relative; display: flex; flex-direction: column; gap: 8px;
+    padding: 20px; background: var(--fondo); border: 1px solid var(--filete);
+    transition: border-color 0.15s, transform 0.15s;
+  }
+  .tarjeta:hover { border-color: var(--filete-fuerte); transform: translateY(-2px); }
+  .tarjeta h3 { margin: 0; }
+  .tarjeta h3 a { text-decoration: none; }
+  .tarjeta h3 a::after { content: ''; position: absolute; inset: 0; }
+  .resumen { color: var(--suave); font-size: 0.95rem; margin: 0; flex: 1; }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
+</style>
