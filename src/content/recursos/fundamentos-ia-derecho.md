@@ -11,7 +11,7 @@ proyecto: "Fundamentos de IA para el Derecho"
 enlace: "https://ia-derecho-curso.vercel.app"
 fuente: "github.com/dojedacifuentes/ia-derecho-curso · src/content/unidades/"
 autoria: ["Diego Hernán Ojeda Cifuentes"]
-estado: "revision"
+estado: "publicado"
 actualizado: "2026-10-05"
 destacado: true
 etiquetas: ["portafolio","rúbricas","clínica jurídica"]
