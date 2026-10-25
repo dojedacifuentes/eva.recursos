@@ -1,9 +1,10 @@
 # EVA · Recursos de IA y Derecho
 
 Repositorio abierto que reúne en un solo catálogo los materiales de EVA para docentes y estudiantes de Derecho:
-n**Sitio:** https://eva-recursos.vercel.app (Vercel publica solo cada push a `main`).
 cursos, lecciones, juegos, guías, prompts y paquetes para el aula virtual. Cada recurso tiene una **ficha** con su
 público, objetivos, licencia, estado de revisión y dónde usarlo.
+
+**Sitio:** https://eva-recursos.vercel.app (Vercel lo vuelve a publicar con cada push a `main`).
 
 No copia los recursos: los describe y enlaza a donde viven (EVA ACADEMY, EVA LAB, EVA × Derecho PUCV, EVA ARCADE…).
 
