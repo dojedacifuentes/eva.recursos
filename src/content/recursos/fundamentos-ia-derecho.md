@@ -8,13 +8,13 @@ nivel: "intermedio"
 duracion: "18 h"
 formato: ["web","Markdown"]
 proyecto: "Fundamentos de IA para el Derecho"
-fuente: "Archivo local ia-derecho-curso · src/content/unidades/"
+enlace: "https://ia-derecho-curso.vercel.app"
+fuente: "github.com/dojedacifuentes/ia-derecho-curso · src/content/unidades/"
 autoria: ["Diego Hernán Ojeda Cifuentes"]
 estado: "revision"
 actualizado: "2026-10-05"
 destacado: true
 etiquetas: ["portafolio","rúbricas","clínica jurídica"]
-avisos: ["Todavía no está publicado en la web ni en GitHub."]
 objetivos: ["Explicar qué es un modelo de lenguaje y qué hay disponible","Configurar privacidad, datos y conectores","Usar y construir skills, gems, GPTs y proyectos","Diseñar un flujo de trabajo propio con control crítico"]
 ---
 
