@@ -37,5 +37,6 @@ npm run build    # sitio en dist/ + índice de búsqueda
 
 ## Licencia
 
-El código del sitio queda por licenciar (propuesta: MIT). Cada recurso declara su propia licencia en su ficha;
-mientras diga «Por definir», se puede usar en clase pero no redistribuir.
+- Código del sitio: [MIT](LICENSE).
+- Contenido (fichas, textos, documentos) y recursos: [CC BY 4.0](LICENSE-CONTENIDO.md), salvo que la ficha diga otra cosa.
+- Fuera de la licencia: los logos y marcas de la PUCV y del DIAT, y la marca y la imagen de EVA.

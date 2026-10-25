@@ -26,7 +26,7 @@ const jsonld = {
   teaches: d.objetivos,
   keywords: d.etiquetas.join(', '),
   timeRequired: d.duracion,
-  license: d.licencia,
+  license: d.licencia === 'CC BY 4.0' ? 'https://creativecommons.org/licenses/by/4.0/' : d.licencia,
   author: d.autoria.map((name) => ({ '@type': 'Person', name })),
   dateModified: d.actualizado.toISOString().slice(0, 10),
   url: d.enlace,

@@ -43,7 +43,7 @@ Revisión de todas las carpetas del PC 1 con material de IA y Derecho. Las ficha
 
 ## Pendientes generales
 
-1. **Licencias.** Ningún proyecto declara licencia propia. Propuesta: CC BY 4.0 para el contenido y MIT para el código.
+1. ~~**Licencias.**~~ Hecho (25-10-2026): CC BY 4.0 para el contenido y MIT para el código (`LICENSE`, `LICENSE-CONTENIDO.md`).
 2. **Marca PUCV.** Pedir a la Facultad el logo vectorial, el manual de marca y la autorización de uso (registro en `EVA Derecho PUCV - medios en bruto/REGISTRO.md`).
 3. **Revisión jurídica** de los cursos 0 y 1 de EVA × Derecho, de FORO [in]VISIBLE y de POTESTAS.
 4. **Publicar** «Fundamentos de IA para el Derecho» (no tiene commits ni despliegue).

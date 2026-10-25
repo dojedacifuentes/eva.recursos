@@ -47,7 +47,7 @@ const recursos = defineCollection({
     proyecto: z.string(), // de dónde viene: eva.derecho, eva.academy…
     enlace: z.url().optional(), // dónde se usa (si está publicado)
     fuente: z.string().optional(), // dónde está el original (repo y ruta)
-    licencia: z.string().default('Por definir'),
+    licencia: z.string().default('CC BY 4.0'),
     autoria: z.array(z.string()).default(['Equipo EVA']),
     estado: z.enum(Object.keys(ESTADOS) as [keyof typeof ESTADOS]).default('borrador'),
     actualizado: z.coerce.date(),

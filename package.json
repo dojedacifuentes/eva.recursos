@@ -17,5 +17,6 @@
   "devDependencies": {
     "pagefind": "^1.5.2"
   },
-  "description": "Repositorio abierto de recursos de IA y Derecho de EVA"
+  "description": "Repositorio abierto de recursos de IA y Derecho de EVA",
+  "license": "MIT"
 }

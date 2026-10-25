@@ -8,6 +8,7 @@ nivel: "avanzado"
 formato: ["Python","HTML"]
 proyecto: "Curso IA generativa laboral"
 fuente: "github.com/dojedacifuentes/curso-ia-generativa-laboral · .claude/skills/curso-video-modulo/"
+licencia: "MIT (código) · CC BY 4.0 (plantilla y textos)"
 estado: "revision"
 actualizado: "2026-10-25"
 etiquetas: ["video","ffmpeg","Playwright","skill de Claude"]
